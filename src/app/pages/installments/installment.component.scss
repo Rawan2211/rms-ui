@@ -1,0 +1,80 @@
+.main {
+  min-height: 820px;
+}
+.content {
+  height: 600px;
+}
+
+.btn {
+  background-color: #002d40;
+  color: white;
+  width: 80px;
+  height: 40px;
+}
+.table-button {
+  background-color: transparent;
+  color: #002d40;
+  width: 50px;
+  height: 40px
+}
+.table-button:hover,
+.add-icon:hover {
+  color: red;
+}
+mat-icon {
+  font-size: 30px;
+}
+
+th,
+td {
+  line-height: 4;
+  min-width: 140px;
+}
+
+.print-btn {
+  background-color: #002d40;
+  width: 90px;
+  height: 50px;
+ 
+}
+.print-icon{
+  bottom: 5px;
+  right: 5px;
+}
+
+.search{
+ height: 50.3px;
+ border: 1px solid #002d40;
+}
+.search-input{
+   width: 330px;
+}
+
+.search-icon{
+  background-color:#002d40;
+  width: 50px;
+  height: 49px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.warning{
+  color: red;
+}
+
+
+@media print {
+.update-icon, .table-button ,.function-btn {
+     display: none;
+}
+
+ th,td {
+  line-height: 4;
+  min-width: 140px;
+  border-bottom: 1px solid black;
+}
+}
+
+
+
+

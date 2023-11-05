@@ -1,0 +1,28 @@
+.btn {
+  background-color: #002d40;
+  color: white;
+  width: 80px;
+  height: 40px;
+}
+.table-button {
+  background-color: transparent;
+  color: #002d40;
+  cursor: pointer;
+}
+
+.table-button:hover,
+.add-icon:hover {
+  color: red;
+
+}
+mat-icon {
+  font-size: 30px;
+}
+.add-icon,
+.table-button {
+  cursor: pointer;
+}
+th,
+td {
+  line-height: 2;
+}

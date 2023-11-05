@@ -1,0 +1,72 @@
+import { InvestorPageComponent } from './investor-page/investor-page.component';
+import { NgModule } from '@angular/core';
+import { HomePageComponent } from './home-page/home-page.component';
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { CategoryPageComponent } from './category-page/category-page.component';
+import { ProductComponent } from './product/product.component';
+import { CustomersComponent } from './customers/customers.component';
+import { ProfitComponent } from './profits/profits/profit.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { InstallmentComponent } from './installments/installment.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { AuthModule } from '../auth/auth.module';
+import { NgxPrintModule } from 'ngx-print';
+import { ReceiptComponent } from './installments/edit-installment/receipt/receipt.component';
+import { PayInstallmentComponent } from './installments/edit-installment/pay-installment.component';
+import { EmployeeComponent } from './employee/employee.component';
+
+import { AddTransactionComponent } from './investor-page/add-transaction/add-transaction.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { UserComponent } from './user/user.component';
+import { RoleAssignComponent } from './user/role-assign/role-assign/role-assign.component';
+import { RoleComponent } from './role/role.component';
+import { StoreComponent } from './store/store.component';
+import { OrderComponent } from './order/order/order.component';
+
+
+const routes: Routes = [
+  { path: '', redirectTo: 'home' },
+  { path: 'home', component: HomePageComponent },
+  { path: 'product', component: ProductComponent },
+  {path: 'category',component: CategoryPageComponent},
+  { path: 'customers', component: CustomersComponent ,canActivate: [AuthGuard] },
+  { path: 'profits', component: ProfitComponent ,canActivate: [AuthGuard] },
+  { path: 'investor', component: InvestorPageComponent },
+  { path: 'installment', component: InstallmentComponent ,canActivate: [AuthGuard] },
+  { path: 'transaction', component: TransactionComponent },
+  { path: 'employee', component: EmployeeComponent },
+  { path: 'supplier', component: SupplierComponent },
+  { path:'user', component:UserComponent },
+  { path:'role', component:RoleComponent },
+  { path:'user/:id', component : RoleAssignComponent },
+  { path: 'store', component: StoreComponent},
+  {path:'order',component:OrderComponent}
+
+];
+@NgModule({
+  declarations: [
+    HomePageComponent,
+    ProductComponent,
+    CategoryPageComponent,
+    CustomersComponent,
+    ProfitComponent,
+    InvestorPageComponent,
+    InstallmentComponent,
+    TransactionComponent,
+    EmployeeComponent,
+    PayInstallmentComponent,
+    ReceiptComponent,
+    AddTransactionComponent,
+    SupplierComponent,
+    UserComponent,
+    RoleAssignComponent,
+    RoleComponent,
+    StoreComponent,
+    OrderComponent,
+  ],
+  imports: [RouterModule.forChild(routes), SharedModule, TranslateModule,AuthModule,NgxPrintModule],
+
+})
+export class PagesModule {}

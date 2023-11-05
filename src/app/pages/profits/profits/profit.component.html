@@ -1,0 +1,178 @@
+<div class="container">
+  <div class="text-center mt-4">
+    <div>
+      <h3 class="panel-title fw-bold">{{ "profits.profits" | translate }}</h3>
+    </div>
+  </div>
+
+  <div class="d-flex flex-lg-row flex-column shadow-lg my-4 fixed-height">
+      <div
+        class="child-height overflow-scroll bg-white data-table w-100"
+      >
+        <table mat-table [dataSource]="allProfits" class="w-100">
+          <ng-container matColumnDef="id">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "no" | translate }}.
+            </th>
+            <td mat-cell *matCellDef="let i = index" class="text-center pt-2">{{ i + 1 }}</td>
+          </ng-container>
+          <ng-container matColumnDef="bookNo">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "profits.book-no" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center pt-2">{{ element.bookNo }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="profitAmount">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "profits.profit-amount" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center pt-2">
+              {{ element.profitAmount }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "profits.date" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center pt-2">
+              {{ element.date | date : "yyyy-MM-dd" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="calculated">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "profits.calculated" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center pt-2">{{ element.calculated }}</td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th class="text-center fw-bold fs-6" mat-header-cell *matHeaderCellDef>
+              {{ "profits.actions" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center update-icon p-2">
+              <button
+                class="btn table-button bg-transparent"
+                (click)="editData(element)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                class="btn table-button bg-transparent"
+                (click)="openConfirmationDialog(element)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row spinner-row" *matNoDataRow>
+            <td>
+              <app-loading-spinner></app-loading-spinner>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg-4 p-3 bg-light">
+        <div class="pt-3 ps-1 d-flex justify-content-between">
+          <h3 class="panel-title">
+            {{
+              addProfitsForm.controls["id"].value
+                ? ("update" | translate)
+                : ("add" | translate)
+            }}
+            {{ "profits.profits" | translate }}
+          </h3>
+          <mat-icon
+            class="add-icon me-4"
+            (click)="restartForm(); isButtonVisible = true"
+            [hidden]="isButtonVisible"
+          >
+            add</mat-icon
+          >
+        </div>
+        <div>
+          <form [formGroup]="addProfitsForm">
+            <fieldset class="row">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "profits.book-no" | translate }}</mat-label>
+                <input
+                  formControlName="bookNo"
+                  required
+                  type="text"
+                  matInput
+                  placeholder="{{ 'profits.book-no' | translate }}"
+                />
+                <mat-error
+                  *ngIf="addProfitsForm.controls['bookNo'].hasError('required')"
+                >
+                  {{ "profits.book-no" | translate }}
+                  <strong>{{ "profits.required" | translate }}</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "profits.profit-amount" | translate }}</mat-label>
+                <input
+                  formControlName="profitAmount"
+                  required=""
+                  type="number"
+                  matInput
+                  placeholder="{{ 'profits.profit-amount' | translate }}"
+                />
+                <mat-error
+                  *ngIf="
+                    addProfitsForm.controls['profitAmount'].hasError('required')
+                  "
+                >
+                  {{ "profits.profit-amount" | translate }}
+                  <strong>{{
+                    "profits.required" | translate
+                  }}</strong></mat-error
+                >
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ "profits.date" | translate }}</mat-label>
+                <input
+                  formControlName="date"
+                  required=""
+                  type="date"
+                  matInput
+                />
+                <mat-error
+                  *ngIf="addProfitsForm.controls['date'].hasError('required')"
+                >
+                  {{ "profits.date" | translate }}
+                  <strong>{{
+                    "profits.required" | translate
+                  }}</strong></mat-error
+                >
+              </mat-form-field>
+              <mat-checkbox formControlName="calculated" type="checkbox">{{
+                "profits.calculated" | translate
+              }}</mat-checkbox>
+            </fieldset>
+          </form>
+          <div class="actions pb-3 float-end pt-2">
+            <button class="btn me-3" (click)="onSubmit()" [disabled]="submit">
+              {{
+                addProfitsForm.controls["id"].value
+                  ? ("update" | translate)
+                  : ("add" | translate)
+              }}
+            </button>
+            <button class="btn me-3" mat-button (click)="resetForm()">
+              {{
+                addProfitsForm.controls["id"].value
+                  ? ("reset" | translate)
+                  : ("clear" | translate)
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
