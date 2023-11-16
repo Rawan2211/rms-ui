@@ -24,6 +24,7 @@ import { RoleAssignComponent } from './user/role-assign/role-assign/role-assign.
 import { RoleComponent } from './role/role.component';
 import { StoreComponent } from './store/store.component';
 import { OrderComponent } from './order/order/order.component';
+import { FormComponent } from './form/form.component';
 
 
 const routes: Routes = [
@@ -65,6 +66,7 @@ const routes: Routes = [
     RoleComponent,
     StoreComponent,
     OrderComponent,
+    FormComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule, TranslateModule,AuthModule,NgxPrintModule],
 
